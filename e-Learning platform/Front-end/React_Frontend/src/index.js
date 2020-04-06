@@ -7,8 +7,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import Register from './components/Register';
 import Login from './components/Login';
-import UploadPage from './components/UploadPage';
-import ViewResult from './components/ViewResult';
+import Student from './components/Student';
+import Lecturer from './components/Lecturer';
 
 ReactDOM.render(
     <Router>
@@ -21,8 +21,8 @@ ReactDOM.render(
             <Route exact path='/' component={Login} />
             <Route  path='/Register' component={Register} />
             <Route  path='/App' component={App} />
-            <Route  path='/UploadPage' component={UploadPage} />
-            <Route  path='/ViewResult' component={ViewResult} />
+            <Route  path='/Student' component={Student} />
+            <Route  path='/Lecturer' component={Lecturer} />
         </div>
         {/* </div> */}
     </Router>,

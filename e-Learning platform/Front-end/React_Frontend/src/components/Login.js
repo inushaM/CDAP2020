@@ -24,16 +24,33 @@ class Login extends Component {
         console.log(this.state)
         axios.post(constant()+'/login', this.state)
         .then(response => {
-            console.log(response)
-            if(response.data.responseCode === "LOGIN_SUCCESS"){
-              this.props.history.push({
-                pathname : '/UploadPage',
-                state: { detail: response.data }
-              });
+          console.log(response) 
+          if(response.data.systemUser.type === "Student"){ 
+            this.props.history.push({ 
+              pathname : '/Student',
+              state: { detail: response.data } 
+            }); 
 
-            }else{
-                this.props.history.push("/")
-            }
+          }else if(response.data.systemUser.type === "Lecturer"){ 
+            this.props.history.push({ 
+              pathname : '/Lecturer',
+              state: { detail: response.data } 
+            }); 
+          }else{
+            this.props.history.push("/") 
+          }
+
+
+            // console.log(response)
+            // if(response.data.responseCode === "LOGIN_SUCCESS"){
+            //   this.props.history.push({
+            //     pathname : '/UploadPage',
+            //     state: { detail: response.data }
+            //   });
+
+            // }else{
+            //     this.props.history.push("/")
+            // }
             
         })
         .catch(error => {

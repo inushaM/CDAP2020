@@ -10,7 +10,9 @@ class Register extends Component {
       this.state = {
          username:'',
          email:'',
-         password:''
+         password:'',
+         typeList:['Lecturer','Student'],
+         type:'Lecturer'
       }
     }
 
@@ -19,6 +21,12 @@ class Register extends Component {
         state[e.target.name] = e.target.value;
         this.setState(state)
     }
+
+    userTypeHandler = (e) => { 
+        const state = this.state 
+        state[e.target.name] = e.target.value; 
+        this.setState(state) 
+    } 
 
     componentDidMount() {
         axios.get(constant()+'/getcourse').then(
@@ -54,13 +62,13 @@ class Register extends Component {
     }
     
   render() {
-    const { username,email, password} = this.state;
+    const { username,email, password, type} = this.state;
     return (
         <div className="container">
             <div className="panel panel-default">
                 <div className="panel-heading">
                     <h3 className="panel-title">
-                         Registration for the tool
+                         User Registration
                     </h3>
                 </div>
                 <div className="panel-body">
@@ -77,6 +85,18 @@ class Register extends Component {
                         <label>Email:</label>
                         <input type='email' className="form-control" name="email" value={email} onChange={this.changeHandler} placeholder="Email" />
                     </div>
+                    <div className="form-group"> 
+                            <label>User Type:</label> 
+                                <select className="form-control" name="type" onChange={this.userTypeHandler} value={type}>
+                                    {
+                                        this.state.typeList.map(sub => {
+                                            return (
+                                                <option key={sub.id} value={sub.id}>{sub} </option>
+                                            )
+                                        })
+                                    }
+                                </select>
+                        </div> 
                     <button type="submit" className="btn btn btn-outline-success registerBtn">Submit</button>
                     <button type="button" className="btn btn-outline-secondary loginBtn" onClick={this.loginButtonHandler}>Login</button>
                 </form>
